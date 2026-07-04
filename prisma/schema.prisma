@@ -6,3 +6,26 @@ datasource db {
   provider = "sqlite"
   url      = env("DATABASE_URL")
 }
+
+model Asset {
+  id             String   @id @default(cuid())
+  name           String
+  type           String
+  category       String
+  originalPath   String?
+  storagePath    String?
+  thumbnailPath  String?
+  mimeType       String?
+  sizeBytes      Int?
+  metadata       String   @default("{}")
+  parentId       String?
+  parent         Asset?   @relation("AssetFolders", fields: [parentId], references: [id], onDelete: Cascade)
+  children       Asset[]  @relation("AssetFolders")
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  @@index([parentId])
+  @@index([category])
+  @@index([type])
+  @@unique([parentId, name])
+}
