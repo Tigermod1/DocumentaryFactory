@@ -2,6 +2,18 @@
 
 Documentary Factory is an Electron desktop application foundation built with React, Vite, TypeScript, Express, Prisma, SQLite, and Electron Builder.
 
+## Sprint 03 scope
+
+The application now includes the Timeline Engine module alongside the Asset Library:
+
+- SRT and TXT parsing
+- Timestamp conversion
+- Narration detection and semantic scene building
+- Scene insert, delete, reorder, merge, and split operations
+- Timeline ordering, numbering, statistics, and scene metadata
+- Prisma Timeline and Scene models with SQLite persistence
+- Timeline editor, scene list, scene details, and statistics views
+
 ## Sprint 02 scope
 
 The application now includes the Asset Library module:
@@ -72,6 +84,22 @@ The development command starts:
 - `POST /api/assets/folders` - create a folder
 - `PATCH /api/assets/:id` - rename, move, recategorize, update metadata, or update thumbnail
 - `DELETE /api/assets/:id` - delete an asset and managed stored files
+
+## Timeline Engine API
+
+- `GET /api/timelines` - list timelines
+- `GET /api/timelines/:timelineId` - load a timeline with scenes
+- `POST /api/timelines` - create a timeline from SRT or TXT content
+- `POST /api/timelines/parse` - preview a parsed timeline without saving
+- `POST /api/timelines/empty` - create an empty timeline
+- `PATCH /api/timelines/:timelineId` - rename or update metadata
+- `DELETE /api/timelines/:timelineId` - delete a timeline and its scenes
+- `POST /api/timelines/:timelineId/scenes` - insert a manual scene
+- `POST /api/timelines/:timelineId/scenes/reorder` - reorder a scene
+- `PATCH /api/timelines/:timelineId/scenes/:sceneId` - update scene details
+- `POST /api/timelines/:timelineId/scenes/:sceneId/merge` - merge two scenes
+- `POST /api/timelines/:timelineId/scenes/:sceneId/split` - split a scene
+- `DELETE /api/timelines/:timelineId/scenes/:sceneId` - delete a scene
 
 ## Linux desktop runtime notes
 

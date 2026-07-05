@@ -1,5 +1,6 @@
 import express from 'express';
 import { assetRouter } from './modules/assets/assetRoutes.js';
+import { timelineRouter } from './modules/timeline/controller.js';
 
 const app = express();
 const port = Number(process.env.PORT ?? 3001);
@@ -11,6 +12,7 @@ app.get('/health', (_request, response) => {
 });
 
 app.use('/api/assets', assetRouter);
+app.use('/api/timelines', timelineRouter);
 
 app.listen(port, '127.0.0.1', () => {
   console.log(`Documentary Factory API listening on http://127.0.0.1:${port}`);

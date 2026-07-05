@@ -13,7 +13,10 @@ import { AssetForms } from './assets/components/AssetForms';
 import { AssetGrid } from './assets/components/AssetGrid';
 import { FolderTree } from './assets/components/FolderTree';
 import { formatBytes } from './assets/format';
+import { TimelineWorkspace } from './timeline/TimelineWorkspace';
 import type { Asset, AssetCategory, AssetTreeNode, StorageStats } from './assets/types';
+
+type ActiveModule = 'assets' | 'timeline';
 
 function flattenFolders(nodes: AssetTreeNode[]): Asset[] {
   return nodes.flatMap((node) => [
@@ -22,7 +25,7 @@ function flattenFolders(nodes: AssetTreeNode[]): Asset[] {
   ]);
 }
 
-export function App() {
+function AssetLibraryWorkspace() {
   const [assets, setAssets] = useState<Asset[]>([]);
   const [tree, setTree] = useState<AssetTreeNode[]>([]);
   const [storageStats, setStorageStats] = useState<StorageStats | null>(null);
@@ -170,6 +173,43 @@ export function App() {
           })}
         />
       </section>
+    </main>
+  );
+}
+
+export function App() {
+  const [activeModule, setActiveModule] = useState<ActiveModule>('assets');
+
+  return (
+    <main className="root-shell">
+      <header className="module-switcher">
+        <div>
+          <strong>Documentary Factory</strong>
+          <p className="muted">Asset Library and Timeline Engine</p>
+        </div>
+        <div className="module-tabs" role="tablist" aria-label="Application modules">
+          <button
+            type="button"
+            role="tab"
+            aria-selected={activeModule === 'assets'}
+            className={activeModule === 'assets' ? 'tab selected' : 'tab'}
+            onClick={() => setActiveModule('assets')}
+          >
+            Asset Library
+          </button>
+          <button
+            type="button"
+            role="tab"
+            aria-selected={activeModule === 'timeline'}
+            className={activeModule === 'timeline' ? 'tab selected' : 'tab'}
+            onClick={() => setActiveModule('timeline')}
+          >
+            Timeline Engine
+          </button>
+        </div>
+      </header>
+
+      {activeModule === 'assets' ? <AssetLibraryWorkspace /> : <TimelineWorkspace />}
     </main>
   );
 }

@@ -29,3 +29,41 @@ model Asset {
   @@index([type])
   @@unique([parentId, name])
 }
+
+model Timeline {
+  id           String   @id @default(cuid())
+  name         String
+  sourceFormat String
+  sourceText   String?
+  totalDuration Float    @default(0)
+  wordCount    Int      @default(0)
+  sceneCount   Int      @default(0)
+  metadata     String   @default("{}")
+  scenes       Scene[]
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model Scene {
+  id          String   @id @default(cuid())
+  timelineId  String
+  timeline    Timeline @relation(fields: [timelineId], references: [id], onDelete: Cascade)
+  sceneNumber Int
+  orderIndex  Int
+  startTime   Float
+  endTime     Float
+  duration    Float
+  wordCount   Int      @default(0)
+  narration   String
+  summary     String
+  emotion     String
+  importance  Int
+  keywords    String   @default("[]")
+  metadata    String   @default("{}")
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([timelineId, orderIndex])
+  @@index([timelineId, sceneNumber])
+  @@unique([timelineId, sceneNumber])
+}
