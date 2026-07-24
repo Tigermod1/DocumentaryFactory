@@ -1,0 +1,54 @@
+.prompt-preview{
+    height:100%;
+    display:flex;
+    flex-direction:column;
+    padding:20px;
+    gap:20px;
+    overflow:auto;
+}
+
+.prompt-preview.empty{
+    justify-content:center;
+    align-items:center;
+}
+
+.preview-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.preview-header select{
+    width:220px;
+    padding:10px;
+}
+
+.preview-info{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:20px;
+}
+
+.preview-info div{
+    background:#202020;
+    padding:15px;
+    border-radius:8px;
+}
+
+.prompt-block{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+}
+
+.prompt-block textarea{
+    height:220px;
+    resize:vertical;
+    font-family:Consolas, monospace;
+    font-size:13px;
+    padding:12px;
+    border-radius:8px;
+    border:1px solid #444;
+    background:#1a1a1a;
+    color:#fff;
+}

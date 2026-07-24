@@ -1,0 +1,11 @@
+{
+  "projectId": "demo-project",
+  "projectName": "My Documentary",
+  "topic": "The Rise of Ancient Rome",
+  "market": "US",
+  "style": "Documentary",
+  "language": "English",
+  "provider": "flow",
+  "savedAt": "2026-07-09T15:05:04.774Z",
+  "script": "\nThis is a demo documentary script.\n\nAncient Rome was one of the greatest civilizations in human history.\n"
+}

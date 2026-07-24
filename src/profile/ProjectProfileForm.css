@@ -1,0 +1,37 @@
+.project-profile-form{
+    padding:24px;
+    overflow:auto;
+    height:100%;
+}
+
+.project-profile-form section{
+    margin-bottom:36px;
+}
+
+.project-profile-form h2{
+    margin-bottom:30px;
+}
+
+.project-profile-form h3{
+    margin-bottom:16px;
+}
+
+.project-profile-form label{
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+    margin-bottom:16px;
+}
+
+.project-profile-form input,
+.project-profile-form textarea,
+.project-profile-form select{
+    padding:10px;
+    border-radius:8px;
+    border:1px solid #444;
+}
+
+.checkbox{
+    flex-direction:row!important;
+    align-items:center;
+}

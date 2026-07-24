@@ -1,0 +1,99 @@
+.library-sidebar {
+  width: 240px;
+  min-width: 240px;
+  background: #1e1e1e;
+  border-right: 1px solid #333;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.library-sidebar h2 {
+  margin: 0 0 12px;
+  color: #ffffff;
+}
+
+.sidebar-btn {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  background: #2c2c2c;
+  color: #ffffff;
+  cursor: pointer;
+  text-align: left;
+  transition: 0.2s;
+}
+
+.sidebar-btn:hover {
+  background: #3b3b3b;
+}
+
+.sidebar-btn.active {
+  background: #0b84ff;
+}
+
+.sidebar-divider {
+  margin: 12px 0;
+  border-top: 1px solid #444;
+}
+
+.sidebar-info {
+  color: #cccccc;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.library-card {
+  background: #242424;
+  border: 1px solid #333;
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.library-card:hover {
+  transform: translateY(-3px);
+  border-color: #0b84ff;
+}
+
+.library-card.selected {
+  border: 2px solid #0b84ff;
+}
+
+.library-preview {
+  width: 100%;
+  aspect-ratio: 1;
+  background: #111;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.library-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.library-placeholder {
+  color: #777;
+  font-weight: bold;
+}
+
+.library-info {
+  padding: 14px;
+}
+
+.library-info h3 {
+  margin: 0 0 8px;
+  color: white;
+}
+
+.library-info p {
+  margin: 0;
+  color: #bcbcbc;
+  font-size: 13px;
+}

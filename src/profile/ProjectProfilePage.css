@@ -1,0 +1,13 @@
+.profile-page{
+    display:flex;
+    height:100%;
+    width:100%;
+    overflow:hidden;
+}
+
+.profile-content{
+    flex:1;
+    display:flex;
+    flex-direction:column;
+    overflow:hidden;
+}

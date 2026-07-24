@@ -1,4 +1,10 @@
 import type { SceneDto, SceneEmotion, SubtitleBlock } from './types.js';
+import { analyzeStory } from "./story-intelligence.js";
+import { analyzeVisual } from "./visual-engine.js";
+import { analyzeCharacters } from "./character-engine.js";
+import { analyzeEnvironment } from "./environment-engine.js";
+import { buildAssetPlan } from "./asset-planner.js";
+// import type { PromptTemplate } from "./template-engine.js";
 
 const STOP_WORDS = new Set([
   'a',
@@ -181,29 +187,114 @@ function splitLongNarration(text: string): string[] {
   return segments.length > 0 ? segments : [text];
 }
 
+// ======================================================
+// scene-builder.ts
+// PART 2
+// ======================================================
+
+// Thay toàn bộ hàm makeScene()
+
 function makeScene(
   startTime: number,
   endTime: number,
   text: string,
   narration: boolean,
-): Omit<SceneDto, 'id' | 'sceneNumber' | 'orderIndex' | 'createdAt' | 'updatedAt'> {
+): Omit<
+  SceneDto,
+  "id" |
+  "sceneNumber" |
+  "orderIndex" |
+  "createdAt" |
+  "updatedAt"
+> {
+
   const narrationText = cleanText(text);
-  const duration = Math.max(0, endTime - startTime);
+
+  const duration = Math.max(
+    0,
+    endTime - startTime
+  );
+
+  const emotion =
+    detectEmotion(narrationText);
+
+  const wordCount =
+    countWords(narrationText);
+
+  const story =
+    analyzeStory(
+      narrationText,
+      emotion,
+      wordCount
+    );
+
+  const visual =
+    analyzeVisual(
+      narrationText,
+      story.beat
+    );
+	
+  const characters =
+    analyzeCharacters(narrationText);
+	
+  const environment =
+    analyzeEnvironment(narrationText);
+	
+  const assetPlan = buildAssetPlan(
+    narrationText,
+    characters,
+    environment,
+    visual
+);
+
   return {
+
     startTime,
+
     endTime,
+
     duration,
+
     narration: narrationText,
-    summary: summarize(narrationText),
-    emotion: detectEmotion(narrationText),
-    importance: scoreImportance(narrationText, narration),
-    keywords: extractKeywords(narrationText),
+
+    summary:
+      summarize(narrationText),
+
+    emotion,
+
+    importance:
+      scoreImportance(
+        narrationText,
+        narration
+      ),
+
+    keywords:
+      extractKeywords(
+        narrationText
+      ),
+
     metadata: {
+
       narration,
+
       excerptLength: narrationText.length,
+
+      story,
+
+      visual,
+	  
+	  characters,
+	  
+	  environment,
+	  
+	  assetPlan,
+
     },
-    wordCount: countWords(narrationText),
+
+    wordCount,
+
   };
+
 }
 
 function sceneBoundary(prev: SubtitleBlock, next: SubtitleBlock, bufferText: string, bufferStart: number, bufferEnd: number): boolean {

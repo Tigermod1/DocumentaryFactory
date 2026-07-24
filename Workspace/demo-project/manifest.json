@@ -1,0 +1,10 @@
+{
+  "id": "demo-project",
+  "projectName": "My Documentary",
+  "topic": "The Rise of Ancient Rome",
+  "market": "US",
+  "style": "Documentary",
+  "language": "English",
+  "provider": "flow",
+  "createdAt": "2026-07-09T15:05:04.773Z"
+}
